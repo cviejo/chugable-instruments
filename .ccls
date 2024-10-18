@@ -1,0 +1,8 @@
+clang
+
+%h -x
+%h c++-header
+-I./clds
+-I./rngs
+-I./mi
+-I./chuck/include
