@@ -11,8 +11,8 @@ CK_DLL_MFUN(rings_setPolyphony);
 CK_DLL_MFUN(rings_getPolyphony);
 CK_DLL_MFUN(rings_setModel);
 CK_DLL_MFUN(rings_getModel);
-CK_DLL_MFUN(rings_setFrequency);
-CK_DLL_MFUN(rings_getFrequency);
+CK_DLL_MFUN(rings_setNote);
+CK_DLL_MFUN(rings_getNote);
 CK_DLL_MFUN(rings_setStructure);
 CK_DLL_MFUN(rings_getStructure);
 CK_DLL_MFUN(rings_setBrightness);
@@ -60,9 +60,9 @@ CK_DLL_QUERY(Rings) {
 	QUERY->add_arg(QUERY, "int", "arg");
 	QUERY->add_mfun(QUERY, rings_getModel, "int", "model");
 
-	QUERY->add_mfun(QUERY, rings_setFrequency, "void", "frequency");
+	QUERY->add_mfun(QUERY, rings_setNote, "void", "note");
 	QUERY->add_arg(QUERY, "float", "arg");
-	QUERY->add_mfun(QUERY, rings_getFrequency, "float", "frequency");
+	QUERY->add_mfun(QUERY, rings_getNote, "float", "note");
 
 	QUERY->add_mfun(QUERY, rings_setStructure, "void", "structure");
 	QUERY->add_arg(QUERY, "float", "arg");
@@ -180,7 +180,7 @@ CK_DLL_MFUN(rings_setModel) {
 	x->string_synth.set_fx(static_cast<rings::FxType>(model));
 }
 
-CK_DLL_MFUN(rings_setFrequency) {
+CK_DLL_MFUN(rings_setNote) {
 	RingsData* x = (RingsData*)OBJ_MEMBER_INT(SELF, rings_data_offset);
 	x->performance_state.note = GET_NEXT_FLOAT(ARGS);
 }
@@ -230,7 +230,7 @@ CK_DLL_MFUN(rings_getModel) {
 	RETURN->v_int = static_cast<int>(x->part.model());
 }
 
-CK_DLL_MFUN(rings_getFrequency) {
+CK_DLL_MFUN(rings_getNote) {
 	RingsData* x = (RingsData*)OBJ_MEMBER_INT(SELF, rings_data_offset);
 	RETURN->v_float = x->performance_state.note;
 }
