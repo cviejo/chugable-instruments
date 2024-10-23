@@ -27,7 +27,7 @@ LDFLAGS+=-mmacosx-version-min=10.9 -arch $(shell uname -m) -lc++
 CXX=clang++
 endif
 
-ifeq ($(filter linux linux-jack linux-alsa,$(MAKECMDGOALS)),$(MAKECMDGOALS))
+ifeq ($(filter linux,$(MAKECMDGOALS)),$(MAKECMDGOALS))
 FLAGS+=-D__LINUX_ALSA__ -D__PLATFORM_LINUX__ -fPIC
 LDFLAGS+=-lstdc++ -fPIC
 CXX=g++
@@ -40,7 +40,7 @@ current:
 	@echo "[chugin build]: please use one of the following configurations:"
 	@echo "   make linux or make mac"
 
-mac osx linux linux-oss linux-jack linux-alsa: $(CHUG)
+mac osx linux: $(CHUG)
 $(CHUG): $(C_OBJECTS) $(CXX_OBJECTS) $(CC_OBJECTS)
 	$(LD) $(LDFLAGS) -o $@ $^
 
