@@ -2,6 +2,6 @@ clang
 
 %h -x
 %h c++-header
--I./mutable-intruments/eurorack
--I./mutable-intruments/parasites
+-I./eurorack
+-I./parasites
 -I./chuck/include
