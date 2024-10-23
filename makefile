@@ -2,7 +2,7 @@ CHUGINS=clds cldsp rngs
 
 current:
 	@echo "[chugins build]: please use one of the following configurations:"
-	@echo "   make linux or make mac"
+	@echo "   make linux, make mac, make osx, make clean, or make install"
 
 $(MAKECMDGOALS): $(CHUGINS)
 $(CHUGINS):
