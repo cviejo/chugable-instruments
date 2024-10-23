@@ -2,7 +2,7 @@ CHUGIN_NAME=Clds
 
 CXX_MODULES=clds.cpp
 
-mi=../../mutable-intruments/eurorack
+mi=../../eurorack
 
 CC_MODULES=$(mi)/stmlib/utils/random.cc \
 	$(mi)/stmlib/dsp/atan.cc \

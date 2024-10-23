@@ -1,0 +1,6 @@
+[submodule "eurorack"]
+	path = eurorack
+	url = https://github.com/pichenettes/eurorack.git
+[submodule "parasites"]
+	path = parasites
+	url = https://github.com/mqtthiqs/parasites.git

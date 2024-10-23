@@ -3,7 +3,7 @@ CHUGIN_NAME=Cldsp
 # CXX_MODULES=cldsp.cpp
 CXX_MODULES=../clds/clds.cpp
 
-mi=../../mutable-intruments/parasites
+mi=../../parasites
 
 CC_MODULES=$(mi)/stmlib/utils/random.cc \
 	$(mi)/stmlib/dsp/atan.cc \
