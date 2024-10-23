@@ -44,9 +44,9 @@ struct CldsData {
 };
 
 CK_DLL_QUERY(Clds) {
-	QUERY->setname(QUERY, "Clds");
+	QUERY->setname(QUERY, "CldsP");
 
-	QUERY->begin_class(QUERY, "Clds", "UGen");
+	QUERY->begin_class(QUERY, "CldsP", "UGen");
 
 	QUERY->add_ctor(QUERY, clds_ctor);
 	QUERY->add_dtor(QUERY, clds_dtor);

@@ -1,14 +1,17 @@
-adc => Rings rings => dac;
+adc => Rngs rngs => dac;
 
-rings.internalExciter(0);
-rings.polyphony(1);
-rings.model(3);
-rings.note(16);
-rings.structure(0.4);
-rings.brightness(0.5);
-rings.damping(0.0);
-rings.position(0.9);
+// TODO: replace adc with wav file
 
-rings.gain(0.5);  // safety first
+rngs.internalExciter(0);
+rngs.polyphony(1);
+rngs.model(3);
+rngs.note(16);
+rngs.structure(0.4);
+rngs.brightness(0.5);
+rngs.damping(0.0);
+rngs.position(0.9);
+
+// safety first
+rngs.gain(0.5);
 
 1::eon => now;

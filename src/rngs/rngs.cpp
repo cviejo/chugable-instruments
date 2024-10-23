@@ -43,9 +43,9 @@ struct RingsData {
 };
 
 CK_DLL_QUERY(Rings) {
-	QUERY->setname(QUERY, "Rings");
+	QUERY->setname(QUERY, "Rngs");
 
-	QUERY->begin_class(QUERY, "Rings", "UGen");
+	QUERY->begin_class(QUERY, "Rngs", "UGen");
 
 	QUERY->add_ctor(QUERY, rings_ctor);
 	QUERY->add_dtor(QUERY, rings_dtor);
@@ -105,7 +105,7 @@ CK_DLL_CTOR(rings_ctor) {
 
 	x->part.Init(x->reverb_buffer);
 	x->string_synth.Init(x->reverb_buffer);
-	x->strummer.Init(0.01, 44100.0 / 24);
+	x->strummer.Init(0.01, API->vm->srate(VM) / 128);
 
 	x->part.set_polyphony(1);
 	x->part.set_model(rings::RESONATOR_MODEL_MODAL);

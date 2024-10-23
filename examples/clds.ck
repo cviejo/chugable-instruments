@@ -1,6 +1,8 @@
-adc => Clds clds => dac;
+adc => CldsP clouds => dac;
 
-clds.pitch(12.0);
-clds.gain(0.5);
+clouds.pitch(12.0);
+clouds.gain(0.5);
+
+// TODO
 
 1::eon => now;

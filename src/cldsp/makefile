@@ -1,7 +1,6 @@
-CHUGIN_NAME=Cldsp
+CHUGIN_NAME=CldsP
 
-# CXX_MODULES=cldsp.cpp
-CXX_MODULES=../clds/clds.cpp
+CXX_MODULES=cldsp.cpp
 
 mi=../../parasites
 
@@ -18,7 +17,6 @@ CC_MODULES=$(mi)/stmlib/utils/random.cc \
 
 FLAGS+=-I$(mi) \
 	-I$(mi)/stmlib \
-	-I$(mi)/clouds \
-	-DPARASITES
+	-I$(mi)/clouds
 
 include ../common/makefile
