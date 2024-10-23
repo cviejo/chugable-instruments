@@ -2,7 +2,6 @@ clang
 
 %h -x
 %h c++-header
--I./clds
--I./rngs
--I./mi
+-I./mutable-intruments/eurorack
+-I./mutable-intruments/parasites
 -I./chuck/include

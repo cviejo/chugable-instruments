@@ -1,0 +1,6 @@
+ignore.*
+
+# .o and other build files
+*.o
+*.so
+*.obj
