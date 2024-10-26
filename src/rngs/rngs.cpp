@@ -7,26 +7,30 @@
 CK_DLL_CTOR(rings_ctor);
 CK_DLL_DTOR(rings_dtor);
 
-CK_DLL_MFUN(rings_setPolyphony);
-CK_DLL_MFUN(rings_getPolyphony);
-CK_DLL_MFUN(rings_setModel);
-CK_DLL_MFUN(rings_getModel);
-CK_DLL_MFUN(rings_setNote);
-CK_DLL_MFUN(rings_getNote);
-CK_DLL_MFUN(rings_setStructure);
-CK_DLL_MFUN(rings_getStructure);
 CK_DLL_MFUN(rings_setBrightness);
 CK_DLL_MFUN(rings_getBrightness);
 CK_DLL_MFUN(rings_setDamping);
 CK_DLL_MFUN(rings_getDamping);
-CK_DLL_MFUN(rings_setPosition);
-CK_DLL_MFUN(rings_getPosition);
 CK_DLL_MFUN(rings_setEasterEgg);
 CK_DLL_MFUN(rings_getEasterEgg);
-CK_DLL_MFUN(rings_strum);
+CK_DLL_MFUN(rings_setFM);
+CK_DLL_MFUN(rings_getFM);
 CK_DLL_MFUN(rings_setInternalExciter);
 CK_DLL_MFUN(rings_getInternalExciter);
+CK_DLL_MFUN(rings_setModel);
+CK_DLL_MFUN(rings_getModel);
+CK_DLL_MFUN(rings_setNote);
+CK_DLL_MFUN(rings_getNote);
+CK_DLL_MFUN(rings_setPolyphony);
+CK_DLL_MFUN(rings_getPolyphony);
+CK_DLL_MFUN(rings_setPosition);
+CK_DLL_MFUN(rings_getPosition);
+CK_DLL_MFUN(rings_getStructure);
+CK_DLL_MFUN(rings_setStructure);
+CK_DLL_MFUN(rings_getTonic);
+CK_DLL_MFUN(rings_setTonic);
 
+CK_DLL_MFUN(rings_strum);
 CK_DLL_TICKF(rings_tick);
 
 t_CKINT rings_data_offset = 0;
@@ -39,7 +43,6 @@ struct RingsData {
 	rings::Strummer strummer;
 	uint16_t* reverb_buffer;
 	bool easter_egg;
-	float in_level;
 };
 
 CK_DLL_QUERY(Rings) {
@@ -64,6 +67,10 @@ CK_DLL_QUERY(Rings) {
 	QUERY->add_arg(QUERY, "float", "arg");
 	QUERY->add_mfun(QUERY, rings_getNote, "float", "note");
 
+	QUERY->add_mfun(QUERY, rings_setTonic, "void", "tonic");
+	QUERY->add_arg(QUERY, "float", "arg");
+	QUERY->add_mfun(QUERY, rings_getTonic, "float", "tonic");
+
 	QUERY->add_mfun(QUERY, rings_setStructure, "void", "structure");
 	QUERY->add_arg(QUERY, "float", "arg");
 	QUERY->add_mfun(QUERY, rings_getStructure, "float", "structure");
@@ -87,6 +94,10 @@ CK_DLL_QUERY(Rings) {
 	QUERY->add_mfun(QUERY, rings_setInternalExciter, "void", "internalExciter");
 	QUERY->add_arg(QUERY, "int", "arg");
 	QUERY->add_mfun(QUERY, rings_getInternalExciter, "int", "internalExciter");
+
+	QUERY->add_mfun(QUERY, rings_setFM, "void", "fm");
+	QUERY->add_arg(QUERY, "float", "arg");
+	QUERY->add_mfun(QUERY, rings_getFM, "float", "fm");
 
 	QUERY->add_mfun(QUERY, rings_strum, "void", "strum");
 
@@ -113,7 +124,6 @@ CK_DLL_CTOR(rings_ctor) {
 	x->string_synth.set_fx(rings::FX_REVERB);
 
 	x->easter_egg = false;
-	x->in_level = 0.0f;
 
 	x->patch.structure = 0.5f;
 	x->patch.brightness = 0.5f;
@@ -185,6 +195,11 @@ CK_DLL_MFUN(rings_setNote) {
 	x->performance_state.note = GET_NEXT_FLOAT(ARGS);
 }
 
+CK_DLL_MFUN(rings_setTonic) {
+	RingsData* x = (RingsData*)OBJ_MEMBER_INT(SELF, rings_data_offset);
+	x->performance_state.tonic = GET_NEXT_FLOAT(ARGS);
+}
+
 CK_DLL_MFUN(rings_setStructure) {
 	RingsData* x = (RingsData*)OBJ_MEMBER_INT(SELF, rings_data_offset);
 	x->patch.structure = GET_NEXT_FLOAT(ARGS);
@@ -235,6 +250,11 @@ CK_DLL_MFUN(rings_getNote) {
 	RETURN->v_float = x->performance_state.note;
 }
 
+CK_DLL_MFUN(rings_getTonic) {
+	RingsData* x = (RingsData*)OBJ_MEMBER_INT(SELF, rings_data_offset);
+	RETURN->v_float = x->performance_state.tonic;
+}
+
 CK_DLL_MFUN(rings_getStructure) {
 	RingsData* x = (RingsData*)OBJ_MEMBER_INT(SELF, rings_data_offset);
 	RETURN->v_float = x->patch.structure;
@@ -263,4 +283,14 @@ CK_DLL_MFUN(rings_getEasterEgg) {
 CK_DLL_MFUN(rings_getInternalExciter) {
 	RingsData* x = (RingsData*)OBJ_MEMBER_INT(SELF, rings_data_offset);
 	RETURN->v_int = x->performance_state.internal_exciter ? 1 : 0;
+}
+
+CK_DLL_MFUN(rings_setFM) {
+	RingsData* x = (RingsData*)OBJ_MEMBER_INT(SELF, rings_data_offset);
+	x->performance_state.fm = GET_NEXT_FLOAT(ARGS);
+}
+
+CK_DLL_MFUN(rings_getFM) {
+	RingsData* x = (RingsData*)OBJ_MEMBER_INT(SELF, rings_data_offset);
+	RETURN->v_float = x->performance_state.fm;
 }
