@@ -4,6 +4,7 @@ mutable-instruments for chuck. Currently includes:
 
 -  Clouds (Clds)
 -  Clouds Parasites (CldsP)
+-  OnsetDetector (OnsetDetector)
 -  Rings (Rngs)
 
 ## Installation

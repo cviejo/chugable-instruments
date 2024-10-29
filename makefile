@@ -1,4 +1,4 @@
-CHUGINS=clds cldsp rngs
+CHUGINS=clds cldsp rngs onset-detector
 
 current:
 	@echo "[chugins build]: please use one of the following configurations:"
