@@ -30,14 +30,14 @@ Note: You may need to use `sudo` for the installation step if you don't have wri
 ```chuck
 adc => Rngs rngs => dac;
 
-rngs.internalExciter(0);
-rngs.polyphony(1);
-rngs.model(3);
-rngs.note(16);
-rngs.structure(0.4);
-rngs.brightness(0.5);
-rngs.damping(0.0);
-rngs.position(0.9);
+false => rngs.internalExciter;
+1 => rngs.polyphony;
+3 => rngs.model;
+16 => rngs.note;
+0.4 => rngs.structure;
+0.5 => rngs.brightness;
+0.0 => rngs.damping;
+0.9 => rngs.position;
 
 rngs.gain(0.5);  // safety first
 
