@@ -1,3 +1,5 @@
+@import "../src/rngs/Rngs.chug";
+
 Rngs rngs => dac;
 
 rngs.internalExciter(true);

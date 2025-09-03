@@ -1,3 +1,5 @@
+@import "../src/rngs/Rngs.chug";
+
 adc => Rngs rngs => dac;
 
 // TODO: replace adc with wav file
