@@ -1,4 +1,4 @@
-@import "OnsetDetector.chug";
+@import "../src/onset-detector/OnsetDetector.chug";
 
 SndBuf buffer("./examples/1.wav");
 
